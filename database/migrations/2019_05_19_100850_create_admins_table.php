@@ -19,12 +19,14 @@ class CreateAdminsTable extends Migration
                 $table->string("full_name");
                 $table->string("avatar");
                 $table->unsignedInteger('country_id')->nullable();
-                $table->String('type');
+                $table->enum('type',["admin","supervisor"]);
                 $table->enum('status', ["active", "inactive", "deleted"]);
                 $table->string('username')->unique();
                 $table->string('email')->unique();
                 $table->string('password');
                 $table->timestamps();
+
+                $table->rememberToken();
 
 
             });
