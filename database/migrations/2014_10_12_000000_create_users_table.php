@@ -12,16 +12,16 @@ class CreateUsersTable extends Migration
      * @return void
      */
     public function up()
-    {
+    {    
         Schema::create('users', function (Blueprint $table) {
-            $table->integerIncrements('id')->primary();
+            $table->increments('id');
             $table->string("full_name");
             $table->string("avatar");
             $table->String('phone')->nullable();
-            $table->String('country_id')->nullable();
+            $table->unsignedInteger('country_id');
             $table->String('social_account')->nullable();
             $table->String('website')->nullable();
-            $table->String('level_id');
+            $table->unsignedInteger('level_id')->nullable();
             $table->enum('status', ["active", "inactive", "deleted"]);
             $table->integer("points")->default(0);
             $table->string('username')->unique();
@@ -31,13 +31,8 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->timestamps();
 
-
-            $table->foreign('level_id')
-                ->references('id')->on('levels')
-                ->onDelete('cascade');
-            $table->foreign('country_id')
-                ->references('id')->on('countries')
-                ->onDelete('cascade');
+     
+                
         });
     }
 

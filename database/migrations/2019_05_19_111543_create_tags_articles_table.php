@@ -14,19 +14,16 @@ class CreateTagsArticlesTable extends Migration
     public function up()
     {
         Schema::create('tags_articles', function (Blueprint $table) {
-            $table->integerIncrements("id");
-            $table->integer("article_id");
-            $table->integer("tag_id");
+            $table->increments("id");
+            $table->unsignedInteger("article_id");
+            $table->unsignedInteger("tag_id");
             $table->timestamps();
             
             $table->foreign('article_id')
-            ->references('id')->on('articles')
-            ->onDelete('cascade');
+            ->references('id')->on('articles');
 
             $table->foreign('tag_id')
-            ->references('id')->on('tags')
-            ->onDelete('cascade');
-            $table->timestamps();
+            ->references('id')->on('tags');
         });
     }
 

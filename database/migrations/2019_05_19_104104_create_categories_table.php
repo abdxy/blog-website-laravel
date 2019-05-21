@@ -14,15 +14,15 @@ class CreateCategoriesTable extends Migration
     public function up()
     {
         Schema::create('categories', function (Blueprint $table) {
-            $table->bigIncrements('id')->primary();
+            $table->increments('id');
             $table->string("name");
             $table->string("slug");
             $table->string("cover");
             $table->enum('status', ["active", "inactive"]);
             $table->integer("numbers_of_articles");
             $table->integer("numbers_of_rating");
-            $table->timestamps("published_at");
-            $table->timestamps("last_add_at");
+            $table->timestamp("published_at")->nullable();
+            $table->timestamp("last_add_at")->nullable();
             $table->timestamps();
         });
     }

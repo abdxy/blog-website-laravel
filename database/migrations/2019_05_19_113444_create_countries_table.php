@@ -14,8 +14,8 @@ class CreateCountriesTable extends Migration
     public function up()
     {
         Schema::create('countries', function (Blueprint $table) {
-            $table->bigIncrements('id')->primary();
-            $table->bigIncrements('name');
+            $table->increments('id');
+            $table->string('name');
             $table->enum("status",["active","inactive"]);
 
         });

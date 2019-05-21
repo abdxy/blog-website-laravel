@@ -14,13 +14,13 @@ class CreateTagsTable extends Migration
     public function up()
     {
         Schema::create('tags', function (Blueprint $table) {
-            $table->bigIncrements('id')->primary();
+            $table->increments('id');
             $table->string("name");
             $table->string("slug");
             $table->enum('status', ["active", "inactive"]);
             $table->integer("numbers_of_articles");
-            $table->timestamps("published_at");
-            $table->timestamps("last_use_at");
+            $table->timestamp("published_at")->nullable();
+            $table->timestamp("last_use_at")->nullable();
             $table->timestamps();
         });
     }

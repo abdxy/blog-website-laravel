@@ -14,21 +14,19 @@ class CreateRequestLogsTable extends Migration
     public function up()
     {
         Schema::create('request_logs', function (Blueprint $table) {
-            $table->integerIncrements('id')->primary();
-            $table->integer("article_reviews_id");
-            $table->integer("supervisor_id");
-            $table->string("notes");   
+            $table->increments('id');
+            $table->unsignedInteger("article_reviews_id");
+            $table->unsignedInteger("supervisor_id");
+            $table->string("notes")->nullable();   
             $table->string("status");
-            $table->timestamps("accepted_at");
-            $table->timestamps("rejected_at");
+            $table->timestamp("accepted_at")->nullable();
+            $table->timestamp("rejected_at")->nullable();
             $table->timestamps();
 
             $table->foreign('article_reviews_id')
-            ->references('id')->on('article_reviews')
-            ->onDelete('cascade');
+            ->references('id')->on('article_reviews');
             $table->foreign('supervisor_id')
-            ->references('id')->on('admins')
-            ->onDelete('cascade');
+            ->references('id')->on('admins');
           
         });
 

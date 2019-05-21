@@ -15,10 +15,10 @@ class CreateAdminsTable extends Migration
     {
       
             Schema::create('admins', function (Blueprint $table) {
-                $table->integerIncrements('id')->primary();
+                $table->increments('id');
                 $table->string("full_name");
                 $table->string("avatar");
-                $table->String('country_id')->nullable();
+                $table->unsignedInteger('country_id')->nullable();
                 $table->String('type');
                 $table->enum('status', ["active", "inactive", "deleted"]);
                 $table->string('username')->unique();
@@ -26,9 +26,7 @@ class CreateAdminsTable extends Migration
                 $table->string('password');
                 $table->timestamps();
 
-                $table->foreign('country_id')
-                ->references('id')->on('countries')
-                ->onDelete('cascade');
+
             });
         }
         

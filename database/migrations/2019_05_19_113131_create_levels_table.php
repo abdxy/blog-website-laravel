@@ -14,10 +14,10 @@ class CreateLevelsTable extends Migration
     public function up()
     {
         Schema::create('levels', function (Blueprint $table) {
-            $table->bigIncrements('id')->primary();
-            $table->string("level");
-            $table->integer("lowerbound");
-            $table->integer("upperbound");
+            $table->increments('id');
+            $table->string("name");
+            $table->integer("lower_bound");
+            $table->integer("upper_bound");
             $table->timestamps();
         });
     }

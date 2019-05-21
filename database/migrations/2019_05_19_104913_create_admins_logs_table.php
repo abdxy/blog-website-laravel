@@ -16,20 +16,19 @@ class CreateAdminsLogsTable extends Migration
     public function up()
     {
         Schema::create('admins_logs', function (Blueprint $table) {
-            $table->integerIncrements('id')->primary();
-            $table->integer("admin_id");
+            $table->increments('id');
+            $table->unsignedInteger("admin_id");
             $table->string("ip");
             $table->string("country");
             $table->string("machine_type");
             $table->string("os");
-            $table->timestamps("singin_at");
-            $table->timestamps("singout_at");
-            $table->timestamps("last_activity");
+            $table->timestamp("singin_at")->nullable();
+            $table->timestamp("singout_at")->nullable();
+            $table->timestamp("last_activity")->nullable();
             $table->timestamps();
 
             $table->foreign('admin_id')
-             ->references('id')->on('admins')
-             ->onDelete('cascade');
+             ->references('id')->on('admins');
         });
     }
 
