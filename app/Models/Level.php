@@ -1,15 +1,13 @@
 <?php
-
-namespace App;
-
+namespace App\models;
 use Illuminate\Database\Eloquent\Model;
 
 class Level extends Model
 {
     protected $table = 'levels';
-    protected $connection = 'test';
+    protected $connection = 'mysql';
     protected $fillable = [
-        'id', 'name', 'lower_bound', 'upper_bound'
+        'name', 'lower_bound', 'upper_bound'
     ];
 
     protected $casts = [

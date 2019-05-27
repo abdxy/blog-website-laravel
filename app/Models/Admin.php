@@ -1,17 +1,18 @@
 <?php
 
-namespace App;
+namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Admin extends Model
+class Admin extends  Authenticatable
 {
+    use Notifiable;
     /**
      * The connection name for the model.
      *
      * @var string
      */
-    protected $connection = 'test';
+    protected $connection = 'mysql';
     
     /**
      * The table associated with the model.
@@ -20,6 +21,7 @@ class Admin extends Model
      */
     protected $table = 'admins';
 
+    protected $guard="admin";
 
     protected $attributes = [
         'status' => "active",
@@ -27,7 +29,6 @@ class Admin extends Model
     ];
   
     protected $fillable = [
-        'id',
         'full_name', 'avatar', 'country_id', 'type', 'status'
         , 'username', 'email', 'password'
     ];

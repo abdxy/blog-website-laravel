@@ -1,18 +1,17 @@
 <?php
 
-namespace App;
-
+namespace App\models;
 use Illuminate\Database\Eloquent\Model;
 
 class AdminsLog extends Model
 {
 
   protected $table = 'admins_logs';
-  protected $connection = 'test';
+  protected $connection = 'mysql';
 
 
   protected $fillable = [
-    'id', 'admin_id', 'ip', 'country', 'machine_type', 'os', 'singin_at', 'singout_at', 'last_activity'
+    'admin_id', 'ip', 'country', 'machine_type', 'os', 'singin_at', 'singout_at', 'last_activity'
   ];
 
   protected $casts = [

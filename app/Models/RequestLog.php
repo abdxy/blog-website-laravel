@@ -1,23 +1,23 @@
 <?php
 
-namespace App;
+namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class RequestLog extends Model
 {   
     protected $table = 'request_logs';
-    protected $connection = 'test';
+    protected $connection = 'mysql';
 
     protected $fillable = [
-        'id', 'article_reviews_id', 'supervisor_id', 'notes', 'accepted_at'
+        'article_reviews_id', 'supervisor_id', 'notes', 'accepted_at'
         , 'rejected_at'
     ];
 
     protected $casts = [
         'id'=>'integer', 'article_reviews_id'=>'integer'
-        , 'supervisor_id'=>'integer', 'notes'=>'integer', 'accepted_at'=>'timestamp'
-        , 'rejected_at'=>'timestamp'
+        , 'supervisor_id'=>'integer', 'notes'=>'integer', 'accepted_at'=>'datetime:Y-m-d'
+        , 'rejected_at'=>'datetime:Y-m-d'
     ];
 
     protected $dates=['accepted_at','rejected_at'];

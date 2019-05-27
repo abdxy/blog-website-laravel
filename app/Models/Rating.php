@@ -1,15 +1,13 @@
 <?php
-
-namespace App;
-
+namespace App\models;
 use Illuminate\Database\Eloquent\Model;
 
 class Rating extends Model
 {
     protected $table = 'ratings';
-    protected $connection = 'test';
+    protected $connection = 'mysql';
     protected $fillable = [
-        'id', 'article_id', 'guest_id', 'rate'
+         'article_id', 'guest_id', 'rate'
     ];
 
     protected $casts = [

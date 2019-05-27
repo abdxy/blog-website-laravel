@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -8,10 +8,10 @@ class TagsArticle extends Model
 {
   
     protected $table = 'tags_articles';
-    protected $connection = 'test';
+    protected $connection = 'mysql';
 
     protected $fillable = [
-        'id', 'article_id', 'tag_id'
+         'article_id', 'tag_id'
     ];
 
     protected $casts = [

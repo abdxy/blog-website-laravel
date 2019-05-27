@@ -1,16 +1,16 @@
 <?php
 
-namespace App;
+namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Country extends Model
 {
     protected $table = 'countries';
-    protected $connection = 'test';
+    protected $connection = 'mysql';
     protected $attributes=['status'=>'active'];
     protected $fillable = [
-        'id', 'name',  'status'
+        'name',  'status'
     ];
 
     protected $casts = [

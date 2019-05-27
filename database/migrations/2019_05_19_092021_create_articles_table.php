@@ -17,11 +17,11 @@ class CreateArticlesTable extends Migration
             $table->increments('id');
             $table->unsignedInteger("user_id");
             $table->string("title");
-            $table->string("slug");
+            $table->string("slug")->unique();
             $table->string("description");
             $table->text("content");
-            $table->string("cover");
-            $table->integer("rating");
+            $table->string("cover")->nullable();
+            $table->integer("rating")->nullable();
             $table->unsignedInteger("category_id");
             $table->enum("status",["accepted","rejected","underReview","draft"]);
             $table->timestamp("published_at")->nullable();

@@ -16,12 +16,12 @@ class CreateUsersTable extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
             $table->string("full_name");
-            $table->string("avatar");
+            $table->string("avatar")->nullable();
             $table->String('phone')->nullable();
             $table->unsignedInteger('country_id');
             $table->String('social_account')->nullable();
             $table->String('website')->nullable();
-            $table->unsignedInteger('level_id')->nullable();
+            $table->unsignedInteger('level_id');
             $table->enum('status', ["active", "inactive", "deleted"]);
             $table->integer("points")->default(0);
             $table->string('username')->unique();

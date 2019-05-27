@@ -1,16 +1,15 @@
 <?php
-
-namespace App;
+namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
 
 class CategoriesArticle extends Model
 {
     protected $table = 'categories_article';
-    protected $connection = 'test';
+    protected $connection = 'mysql';
   
     protected $fillable = [
-        'id', 'article_id', 'category_id'
+       'article_id', 'category_id'
     ];
 
     protected $casts = [

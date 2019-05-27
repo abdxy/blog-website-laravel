@@ -1,9 +1,8 @@
 <?php
 
-namespace App;
+namespace App\models;
 
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
@@ -12,7 +11,7 @@ class User extends Authenticatable
 
     
     protected $table = 'users';
-    protected $connection = 'test';
+    protected $connection = 'mysql';
     protected $attributes = [
         'status' => "active",
         'avatar'=>"default_avatar.jpg"
@@ -51,7 +50,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'full_name'=>'string', 'avatar'=>'string'
-        ,'website'=>'string','phone'=>'string', 'country_id'='integer'
+        ,'website'=>'string','phone'=>'string', 'country_id'=>'integer'
         , 'type'=>'string', 'status'=>'string','social_account'=>'string'
         ,'level_id'=>'integer','points'=>'integer'
         , 'username'=>'string', 'email'=>'integer', 'password'=>'integer'
