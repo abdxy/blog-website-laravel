@@ -11,7 +11,7 @@ class Level extends Model
     ];
 
     protected $casts = [
-        'id'=>'integer', 'name'=>'string', 'lower_bound'='integer', 'upper_bound'=>'integer'
+        'id'=>'integer', 'name'=>'string', 'lower_bound'=>'integer', 'upper_bound'=>'integer'
     ];
 
     protected $dates=[];

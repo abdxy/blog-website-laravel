@@ -1,9 +1,10 @@
 <?php
 
-namespace App\models;
+namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use App\Models\Article;
 
 class User extends Authenticatable
 {
@@ -26,13 +27,24 @@ class User extends Authenticatable
 
     public function country()
     {
-        return  $this->hasOne(Country::class);
+        return  $this->belongsTo(Country::class);
     }
 
     public function logs()
     {
         return  $this->hasMany(UsersLog::class);
     }
+
+    public function articles()
+    {
+      return $this->hasMany(Article::class);
+    }
+
+    public function level()
+    {
+      return $this->belongsTo(Level::class);
+    }
+    
     /**
      * The attributes that should be hidden for arrays.
      *
@@ -51,8 +63,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'full_name'=>'string', 'avatar'=>'string'
         ,'website'=>'string','phone'=>'string', 'country_id'=>'integer'
-        , 'type'=>'string', 'status'=>'string','social_account'=>'string'
+        , 'status'=>'string','social_account'=>'string'
         ,'level_id'=>'integer','points'=>'integer'
-        , 'username'=>'string', 'email'=>'integer', 'password'=>'integer'
+        , 'username'=>'string', 'email'=>'integer',
     ];
+    
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
 }

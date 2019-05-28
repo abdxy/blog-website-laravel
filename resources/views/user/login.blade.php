@@ -26,5 +26,7 @@
 </form> 
         </div>
 </div>
+
 @include('error')
+
 @endsection

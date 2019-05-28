@@ -8,7 +8,6 @@
     <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
   </head>
   <body >
-       
               <nav class="navbar">
                     <div class="container">
 
@@ -26,10 +25,9 @@
                         <div id="navbarMenu" class="navbar-menu">
 
                                 <div class="navbar-start">
-                                        <a class="navbar-item">
-                                          Home
+                                <a class="navbar-item" href="{{route('Users.all')}}">
+                                          all Users
                                         </a>
-                                  
                                         <a class="navbar-item">
                                           Doc
                                         </a>
@@ -40,28 +38,31 @@
                                 <div class="navbar-item has-dropdown is-hoverable">
                                         <a class="navbar-link" >
                                                 Hi
-                                                {{auth()->user()->name}}
+                                                {{auth()->user()->username}}
                                             </a>
                                         <div class="navbar-dropdown">
-                                           @if (auth("users")->check())
-                                           <a class="navbar-item" href="/profile/{{auth()->user()->id}}">
-                                            Profile
-                                        </a>
-                                           @endif
-                                           @if (auth("admin")->check())
+
+                                            @auth('users')
+                                            <a class="navbar-item" href="/users/{{auth()->user()->username}}">
+                                              Profile
+                                            </a>
+                                            @endauth
+
+                                            @auth('admin')
                                            <a class="navbar-item" href="/admin-dashboard/{{auth()->user()->id}}">
                                             Profile
-                                        </a>
-                                           @endif
-                                           @if (auth("supervisor")->check())
+                                          </a>
+                                            @endauth
+                                            @auth('supervisor')
+                                    
                                            <a class="navbar-item" href="/supervisor-dashboard/{{auth()->user()->id}}">
                                             Profile
                                         </a>
-                                           @endif
+                                        @endauth
                                         
                                         
                                             <hr class="navbar-divider">
-                                            <a class="navbar-item" href="/logout">
+                                            <a class="navbar-item" href="{{route("user.logout")}}">
                                                 Logout
                                             </a>
                                         </div>

@@ -14,7 +14,7 @@ class ArticleRepository
     public function all()
     {
         $artical = $this->getModel();
-        return $artical->all();
+        return $artical->paginate(15);
     }
 
     public function getBySlug($slug)
@@ -31,7 +31,7 @@ class ArticleRepository
 
     public function userArticles($id)
     {
-        return Article::where("user_id", "$id")->all();
+        return Article::where("user_id", "$id")->paginate(15);
     }
 
 }

@@ -1,56 +1,65 @@
 @extends('layout')
 @section('content')
-<div class="title">" {{strtoupper($user->full_name)}} "</div>
-@if ($is_owner)
-    
-<div class="container" style="margin-bottom: 10px;">
 
-<div class="field"><a href="#" class="button is-link">New Article</a></div>
 
-</div>
-@endif
 <div class="container card">
         <div class="section">
-    
-    
-            <div class="row columns is-multiline">
-               @foreach ($quotes as $quote)
-
-               
-               <div class="column is-one-third">
-                  <div class="card">
-                      
-                      <div class="card-content">
-                          
+                <article class="media">
+                        <figure class="media-left">
+                          <p class="image is-128x128">
+                            <img src={{"/img/users-photos/".$user->avatar}}>
+                          </p>
+                        </figure>
+                        <div class="media-content">
                           <div class="content">
-                              <p class="title">
-                                  “{{$quote->desc}}”
-                                </p>
+                            <p>
+                            <div class="title">" {{strtoupper($user->full_name)}} "</div>
+                            </p>
+                        <div class="subtitle">level :{{$user->level->name}}</div>
+                        
+                   
 
                           </div>
-                        <div class="subtitlt">― {{$quote->author}}</div>
-                          <br>
-                          <div class="datetime">{{ $quote->updated_at->format('d/m/Y')}}</div>
-                      </div>@if ($is_owner)
-                      <footer class="card-footer">
                           
-                         <form action="/quotes/{{$quote->id}}/edit" method="get">
-                             @csrf
-                          
-             
-                        <button type="submit" class="button is-info ">Edit</button></form>
-                        <form action="/quotes/{{$quote->id}}" method="post">
-                                @csrf
-                                @method("delete")
-           
-                        <button type="submit" class=" button is-danger ">Delete</button></form>
-                      </footer>
-                      @endif
-                  </div>
-              </div>
 
-               @endforeach
-              </div>
+                        </div>
+      
+                      </article>
+                      
+                      
+    
+                      <div class="row columns is-multiline">
+                            @foreach ($articles=$user->articles()->paginate(15) as $article)
+                            <div class="column is-one-third">
+                             <div class="card">
+                                 <div class="card-image">
+                                   <figure class="image is-4by3">
+                                     <img src={{"/img/articles-covers/".$article->cover}} >
+                                   </figure>
+                                 </div>
+                                 <div class="card-content">
+                                   <div class="media">
+                                     <div class="media-content">
+                                     <a class="title is-4" href="{{route("article.show",['slug'=>$article->slug])}}">{{$article->title}}</a>
+                                     </div>
+                                   </div>
+                               
+                                 <div class="content" style="word-break: break-word;white-space: normal;">{{$article->description}}</div>
+                          
+                 
+                                     <br>
+                                     <div class="datetime">{{ $article->published_at->format("y-m-d-h")}}</div>
+
+                                  </div>
+                                  
+                               </div>
+                           </div>
+                          
+                            @endforeach
+                           </div>
+                           {{ $articles->links() }}
         </div>
     </div>
+
+    @include('error')
 @endsection

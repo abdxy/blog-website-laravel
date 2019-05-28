@@ -13,7 +13,7 @@ class ArticlesTableSeeder extends Seeder
     {
         
     
-        for($i=0;$i<100;$i++)
+        for($i=0;$i<40;$i++)
         DB::table('articles')->insert([
             'title' => Str::random(10),
             'description' => Str::random(40),
@@ -22,7 +22,7 @@ class ArticlesTableSeeder extends Seeder
             'slug' => Str::random(10),
             'category_id'=>1,
             'status'=>'accepted',
-            'cover'=>'cover',
+            'cover'=>'placeholder.png',
             'rating'=>12,
             'published_at'=>now()
         ]);
