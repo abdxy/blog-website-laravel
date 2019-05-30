@@ -10,6 +10,8 @@
     <div class="card-content">
       <div class="media">
         <div class="media-content">
+        
+          
           <p class="title is-4">{{$article->title}}</p>
           <br>
           <div class="subtitle">{{$article->category}}</div>
@@ -26,7 +28,7 @@
       <div> 
           Tags :
           @foreach ($article->tags as $tag)
-        <a href="/tags/{{$tag->name}}">{{$tag->name}}</a>{{$loop->last?"":","}}
+        <a href="/tags/{{$tag->name}}">#{{$tag->name}}</a>{{$loop->last?"":","}}
           @endforeach
         </div>
         <br>
@@ -37,6 +39,10 @@
             @endforeach
           </div>
     </div>
-    
+   
   </div>
+  <br>
+  @if ($article->user_id==auth()->user()->id)
+  <a class="button is-primary" href="/articles/{{$article->id}}/edit">edit</a> 
+    @endif
 @endsection

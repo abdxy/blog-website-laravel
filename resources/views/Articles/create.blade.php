@@ -12,7 +12,7 @@
       <div class="field">
           <div class="control">
               <label for="slug" class="label">slug:</label>
-              <input type="text" class="input"  name="slug">
+              <input type="text" class="input"  name="slug" placeholder="new-games-blabla">
           </div></div>
       <div class="field">
           <div class="control">

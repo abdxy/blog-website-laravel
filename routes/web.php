@@ -32,11 +32,11 @@ Route::post('/register','Users\UserController@store')->name("user.register.creat
     
      Route::get('/articles/create', 'Articles\ArticlesController@create')->name("articles.create");
 
-//     Route::get('/articles/{id}/edit', 'ArticlesController@edit').name("articles.edit");
+     Route::get('/articles/{id}/edit', 'Articles\ArticlesController@edit')->name("articles.edit");
 
      Route::post('/articles', 'Articles\ArticlesController@store')->name("articles.store");
 
-//     Route::patch('/articles/{id}','ArticlesController@update').name("articles.update");
+     Route::patch('/articles/{id}','Articles\ArticlesController@update')->name("articles.update");
 
     
  });

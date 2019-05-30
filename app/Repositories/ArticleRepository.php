@@ -21,6 +21,11 @@ class ArticleRepository
    
     }
 
+    public function getByID($id)
+    {
+        return $this->articleModel->findorfail($id);
+    }
+
     public function all()
     {
 
@@ -33,10 +38,19 @@ class ArticleRepository
     }
 
     public function update($id, $data)
-    {
+    {  
         $article = $this->articleModel->findorfail($id);
-        $article->update($data);
-        return $article->save();
+
+        $article->update([
+            "title"=>$data->title,
+            "slug"=>$data->slug,
+            "content"=>$data->content,
+            "description"=>$data->description,
+            "cover"=>$data->cover,
+            ]);
+         $article->save();
+
+         return $article;
     }
 
     public function userArticles($id)
