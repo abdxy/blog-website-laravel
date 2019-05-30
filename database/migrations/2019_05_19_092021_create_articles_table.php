@@ -20,9 +20,8 @@ class CreateArticlesTable extends Migration
             $table->string("slug")->unique();
             $table->string("description");
             $table->text("content");
-            $table->string("cover")->nullable();
-            $table->integer("rating")->nullable();
-            $table->unsignedInteger("category_id");
+            $table->string("cover")->default("default.png");
+            $table->integer("rating")->default(0);
             $table->enum("status",["accepted","rejected","underReview","draft"]);
             $table->timestamp("published_at")->nullable();
             $table->timestamp("last_rejected_at")->nullable();

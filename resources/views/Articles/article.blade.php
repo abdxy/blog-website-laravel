@@ -11,17 +11,32 @@
       <div class="media">
         <div class="media-content">
           <p class="title is-4">{{$article->title}}</p>
+          <br>
+          <div class="subtitle">{{$article->category}}</div>
         </div>
       </div>
   
       <div class="content">
         {{$article->content}}
- 
-        
-        <br>
-        <div class="datetime">{{ $article->published_at->format("Y-m-d")}}</div>
+
       </div>
+      <div class="datetime">{{ $article->published_at->format("Y-m-d")}}</div>
       <a href="{{route("user.profile",["name"=>$article->user->username])}}">{{$article->user->username}}</a>
+      <br><br><br>
+      <div> 
+          Tags :
+          @foreach ($article->tags as $tag)
+        <a href="/tags/{{$tag->name}}">{{$tag->name}}</a>{{$loop->last?"":","}}
+          @endforeach
+        </div>
+        <br>
+        <div>
+            Categories :
+            @foreach ($article->categories as $category)
+          <a href="/categories/{{$category->name}}">{{$category->name}}</a>{{$loop->last?"":","}}
+            @endforeach
+          </div>
     </div>
+    
   </div>
 @endsection

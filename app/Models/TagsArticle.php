@@ -3,8 +3,9 @@
 namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class TagsArticle extends Model
+class TagsArticle extends Pivot
 {
   
     protected $table = 'tags_articles';
@@ -20,13 +21,5 @@ class TagsArticle extends Model
     
     protected $dates=[];
 
-    public function articles()
-    {
-        $this->belongsToMany(Article::class);
-    }
-    public function tags()
-    {
-        $this->belongsToMany(Tag::class);
-    }
 
 }

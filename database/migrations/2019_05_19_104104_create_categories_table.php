@@ -17,10 +17,10 @@ class CreateCategoriesTable extends Migration
             $table->increments('id');
             $table->string("name");
             $table->string("slug")->unique();
-            $table->string("cover");
+            $table->string("cover")->default("default.png");
             $table->enum('status', ["active", "inactive"]);
-            $table->integer("numbers_of_articles");
-            $table->integer("numbers_of_rating");
+            $table->integer("numbers_of_articles")->default(0);
+            $table->integer("numbers_of_rating")->default(0);
             $table->timestamp("published_at")->nullable();
             $table->timestamp("last_add_at")->nullable();
             $table->timestamps();

@@ -2,7 +2,7 @@
 @section('content')
 <div class="title">create new article</div>
 
-<form action="/articles/create" method="post">
+<form action="/articles" method="post" enctype="multipart/form-data">
   @csrf
   <div class="field">
       <div class="control">
@@ -11,8 +11,13 @@
       </div></div>
       <div class="field">
           <div class="control">
+              <label for="slug" class="label">slug:</label>
+              <input type="text" class="input"  name="slug">
+          </div></div>
+      <div class="field">
+          <div class="control">
               <label for="desc" class="label">description:</label>
-              <input type="input" class="input"  name="desc" >
+              <input type="input" class="input"  name="description" >
           </div></div>
     <div class="field">
             <div class="control">
@@ -22,13 +27,21 @@
             <div class="field">
                 <div class="control">
                     <label for="categories" class="label">categories:</label>
-            <div class="select" name="categories">
-                <select>
-                  <option>option</option>
-                  <option>With options</option>
-                  <option>With options</option>
+                    
+                  @foreach ($categories as $cateogry)
+ 
+                <label class="checkbox">
+                    <input type="checkbox"  name="categories[]" value="{{$cateogry}}">
+                    {{$cateogry}}
+                  </label>
+                  @endforeach
                 </select>
-              </div> </div></div>
+              </div> </div>
+              <div class="field">
+                  <div class="control">
+                      <label for="cover" class="label">cover:</label>
+                      <input type="file" class="file" id="name" name="cover1"  accept="image/*">
+                  </div></div>
             <div class="field">
                 <div class="control">
                     <label for="tags" class="label">tags:</label>

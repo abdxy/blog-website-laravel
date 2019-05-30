@@ -14,7 +14,7 @@
                         <div class="navbar-brand">
                             <a class="navbar-item" href="/">
                                
-                                <div class="title">Blogo</div>
+                                <div class="title" style="color:#c41345;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;margin-top:10px;">BLOGO</div>
                             <span class="navbar-burger burger" data-target="navbarMenu">
                                     <span></span>
                             <span></span>
@@ -26,10 +26,14 @@
 
                                 <div class="navbar-start">
                                 <a class="navbar-item" href="{{route('Users.all')}}">
-                                          all Users
+                                          Users
                                         </a>
-                                        <a class="navbar-item">
-                                          Doc
+                                        <a class="navbar-item" href="/tags">
+                                         Tags
+                                        </a>
+
+                                      <a class="navbar-item" href="{{route("categories")}}">
+                                          Categories
                                         </a>
                                 </div>
                             <div class="navbar-end">
@@ -80,11 +84,14 @@
                         </div>
                     </div>
                 </nav>
-  <section class="section" style="background-color:#A9A9A9;">
+  <section class="section" style="background-color:#c41345;">
     <div class="container"  >
-   
+        <div class="card">
+            <div class="card-content">
       @yield('content')
+    </div></div>
     </div>
+    @include('error')
   </section>
 
   </body>

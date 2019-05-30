@@ -9,22 +9,22 @@ class UserRepository
 
   public function all()
   {
-    return User::paginate(15);
+    return User::latest()->paginate(15);
   }
 
   public function get($id)
   {
-    return User::find($id);
+    return User::findorfail($id);
   }
 
   public function getByName($name)
   {
-    return User::where("username", $name)->first();
+    return User::where("username", $name)->firstOrFail();
   }
 
   public function update($id, $data)
   {
-    $user = User::find($id);
+    $user = User::findorfail($id);
     $user->update($data);
     return $user->save();
   }

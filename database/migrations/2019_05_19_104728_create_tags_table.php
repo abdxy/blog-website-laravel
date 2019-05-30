@@ -15,10 +15,9 @@ class CreateTagsTable extends Migration
     {
         Schema::create('tags', function (Blueprint $table) {
             $table->increments('id');
-            $table->string("name");
-            $table->string("slug")->unique();
-            $table->enum('status', ["active", "inactive"]);
-            $table->integer("numbers_of_articles");
+            $table->string("name")->unique();
+            $table->enum('status', ["active", "inactive"])->default("active");
+            $table->integer("numbers_of_articles")->default(0);
             $table->timestamp("published_at")->nullable();
             $table->timestamp("last_use_at")->nullable();
             $table->timestamps();

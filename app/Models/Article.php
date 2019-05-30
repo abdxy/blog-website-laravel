@@ -3,6 +3,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\models\User;
+use App\models\Category;
+use App\models\Tag;
 
 class Article extends Model
 {
@@ -37,8 +39,14 @@ class Article extends Model
 
     public function categories()
     {
-        return $this->hasMany(CategoriesArticle::class);
+        return $this->belongsToMany(Category::class, CategoriesArticle::class );
     }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class,TagsArticle::class );
+    }
+    
     public function review()
     {
         return $this->hasOne(review::class);

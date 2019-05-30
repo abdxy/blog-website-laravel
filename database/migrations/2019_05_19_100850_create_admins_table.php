@@ -17,7 +17,7 @@ class CreateAdminsTable extends Migration
             Schema::create('admins', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string("full_name");
-                $table->string("avatar");
+                $table->string("avatar")->default("default.png");
                 $table->unsignedInteger('country_id')->nullable();
                 $table->enum('type',["admin","supervisor"]);
                 $table->enum('status', ["active", "inactive", "deleted"]);

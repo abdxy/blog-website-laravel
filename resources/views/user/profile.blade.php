@@ -1,9 +1,6 @@
 @extends('layout')
 @section('content')
 
-
-<div class="container card">
-        <div class="section">
                 <article class="media">
                         <figure class="media-left">
                           <p class="image is-128x128">
@@ -17,19 +14,23 @@
                             </p>
                         <div class="subtitle">level :{{$user->level->name}}</div>
                         
+                        
                    
 
                           </div>
                           
 
                         </div>
-      
+                        @auth("users")
+                        <a class="button is-primary" href="/articles/create">create new article</a>
+                        @endauth
                       </article>
                       
                       
-    
+           
                       <div class="row columns is-multiline">
-                            @foreach ($articles=$user->articles()->paginate(15) as $article)
+                        
+                            @foreach ($articles=$user->articles()->latest()->paginate(15) as $article)
                             <div class="column is-one-third">
                              <div class="card">
                                  <div class="card-image">
@@ -58,8 +59,7 @@
                             @endforeach
                            </div>
                            {{ $articles->links() }}
-        </div>
-    </div>
+
 
     @include('error')
 @endsection

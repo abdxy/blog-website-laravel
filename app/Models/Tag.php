@@ -3,20 +3,21 @@
 namespace App\models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use App\Models\Article;
 
 class Tag extends Model
 {   
-    protected $table = 'categories_article';
+    protected $table = 'tags';
     protected $connection = 'mysql';
     protected $attributes=['status'=>'active'];
     protected $fillable = [
-        'slug', 'name', 'status', 'numbers_of_articles'
+            'name', 'status', 'numbers_of_articles'
         ,  'published_at', 'last_use_at'
     ];
 
     protected $casts = [
-        'id'=>'integer', 'slug'=>'string', 'name'=>'string'
+        'id'=>'integer', 'name'=>'string'
         , 'status'=>'string', 'numbers_of_articles'=>'integer'
         ,  'published_at'=>'timestamp', 'last_use_at'=>'timestamp'
     ];
@@ -25,8 +26,9 @@ class Tag extends Model
 
    public function articles()
    {
-       return $this->hasMany(TagsArticle::class);
+       return $this->BelongsToMany(Article::class,TagsArticle::class);
 
    }
+
 
 }

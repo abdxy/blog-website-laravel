@@ -1,39 +1,35 @@
 @extends('layout')
 @section('content')
 
-<div class="title">All Users</div>
-
+<div class="title">{{$tag->name}}</div>
         <div class="row columns is-multiline">
-           @foreach ($Users as $user)
+           @foreach ($articles as $article)
            <div class="column is-one-third">
             <div class="card">
                 <div class="card-image">
                   <figure class="image is-4by3">
-                    <img src={{"/img/users-photos/".$user->avatar}}>
+                    <img src={{"/img/articles-covers/".$article->cover}}>
                   </figure>
                 </div>
                 <div class="card-content">
                   <div class="media">
                     <div class="media-content">
-                    <a class="title is-4" href="{{route("user.profile",['name'=>$user->username])}}">{{$user->username}}</a>
+                    <a class="title is-4" href="{{route("article.show",['slug'=>$article->slug])}}">{{$article->title}}</a>
                     </div>
                   </div>
               
-                <div class="content">
-                        level:  {{ $user->level->name}}
-                    <br>
-                    country:    {{ $user->country->name}}
-                
-                </div>
+                <div class="content" style="word-break: break-word;white-space: normal;">{{$article->description}}</div>
          
 
                     <br>
+                    <div class="datetime">{{ $article->published_at->format("y-m-d-h")}}</div>
+                <a href="{{route("user.profile",["name"=>$article->user->username])}}">{{$article->user->username}}</a>
                  </div>
               </div>
           </div>
          
            @endforeach
           </div>
-          {{$Users->links()}}
+          {{ $articles->links() }}
 
 @endsection

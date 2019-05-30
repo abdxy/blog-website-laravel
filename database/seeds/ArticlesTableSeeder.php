@@ -20,9 +20,7 @@ class ArticlesTableSeeder extends Seeder
             'content' => Str::random(100),
             'user_id'=>1,
             'slug' => Str::random(10),
-            'category_id'=>1,
             'status'=>'accepted',
-            'cover'=>'placeholder.png',
             'rating'=>12,
             'published_at'=>now()
         ]);

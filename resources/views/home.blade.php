@@ -1,7 +1,5 @@
 @extends('layout')
 @section('content')
-<div class="container card">
-    <div class="section">
 
 
         <div class="row columns is-multiline">
@@ -33,7 +31,5 @@
            @endforeach
           </div>
           {{ $articles->links() }}
-    </div>
-</div>
-    
+
 @endsection

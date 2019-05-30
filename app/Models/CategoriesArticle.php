@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class CategoriesArticle extends Model
 {
-    protected $table = 'categories_article';
+    protected $table = 'categories_articles';
     protected $connection = 'mysql';
   
     protected $fillable = [
@@ -13,16 +13,8 @@ class CategoriesArticle extends Model
     ];
 
     protected $casts = [
-        'id'=>'integer', 'article_id'=>'integer', 'category_id'=>'integer'
+       'article_id'=>'integer', 'category_id'=>'integer'
     ];
 
-    public function article()
-    {
-        return $this->belongsToMany(Article::class);
-    }
 
-    public function category()
-    {
-        return  $this->belongsToMany(AdminsLog::class);
-    }
 }

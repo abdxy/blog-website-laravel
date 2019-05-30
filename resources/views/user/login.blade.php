@@ -1,7 +1,6 @@
 @extends('layout')
 @section('content')
-<div class="card">
-        <div class="card-content">
+
 <h2 class="title">user Login</h2>
 <form method="POST" action="/login">
     @csrf
@@ -24,9 +23,7 @@
           </div>
    
 </form> 
-        </div>
-</div>
 
-@include('error')
+
 
 @endsection

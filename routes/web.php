@@ -1,12 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', "Articles\IndexController@index")->name('home');
 
-Route::get('/articles/{slug}', "Articles\ShowArticleController@show")->name("article.show");
-
-Route::get('/users/{name}', "Users\UserController@showProfile")->name("user.profile");
-Route::get('/users', "Users\AllUsersController@index")->name("Users.all");
 
 
 
@@ -35,11 +30,11 @@ Route::post('/register','Users\UserController@store')->name("user.register.creat
 
 //      Route::get('/account/logout', 'UserController@logout').name("account.logout");
     
-//     Route::get('/articles/create', 'ArticlesController@create').name("articles.create");
+     Route::get('/articles/create', 'Articles\ArticlesController@create')->name("articles.create");
 
 //     Route::get('/articles/{id}/edit', 'ArticlesController@edit').name("articles.edit");
 
-//     Route::post('/articles', 'ArticlesController@store').name("articles.store");
+     Route::post('/articles', 'Articles\ArticlesController@store')->name("articles.store");
 
 //     Route::patch('/articles/{id}','ArticlesController@update').name("articles.update");
 
@@ -65,4 +60,22 @@ Route::post('/register','Users\UserController@store')->name("user.register.creat
     
 
 // });
+
+Route::get('/', "Articles\IndexController@index")->name('home');
+
+Route::get('/articles/{slug}', "Articles\ShowArticleController@show")->name("article.show");
+
+Route::get('/users/{name}', "Users\UserController@showProfile")->name("user.profile");
+
+Route::get('/users', "Users\AllUsersController@index")->name("Users.all");
+
+Route::get("/tags","TagsController@index")->name("tags");
+
+Route::get("/categories","CategoriesController@index")->name("categories");
+
+Route::get("/categories/{name}","CategoriesController@show")->name("category");
+  
+Route::get("/articles",function(){return redirect('/');});
+
+Route::get("/tags/{name}","TagsController@show")->name("tag");
 
