@@ -2,7 +2,7 @@
 namespace App\Repositories;
 
 use App\Models\Article;
-use Illuminate\Support\Facades\Auth;
+
 
 class ArticleRepository
 {
@@ -13,17 +13,26 @@ class ArticleRepository
         $this->articleModel=$articleModel;
     }
 
-
     public function create($data)
     {
-
-        return $this->articleModel->create($data);
+    
+        $article=new $this->articleModel;
+        $article->title=$data->title;
+        $article->slug=$data->slug;
+        $article->content=$data->content;
+        $article->description=$data->description;
+        $article->cover=$data->cover;
+        $article->status="accepted";
+        $article->published_at=now();
+        $article->user_id=$data->user_id;
+        $article->save();
+        return $article;
    
     }
 
-    public function getByID($id)
+    public function getByID($data)
     {
-        return $this->articleModel->findorfail($id);
+        return $this->articleModel->findOrFail($data);
     }
 
     public function all()
@@ -32,30 +41,29 @@ class ArticleRepository
         return $this->articleModel->latest()->paginate(15);
     }
 
-    public function getBySlug($slug)
+    public function getBySlug($data)
     {
-      return $this->articleModel->where('slug',$slug)->firstOrFail();
+      return $this->articleModel->where('slug',$data)->firstOrFail();
     }
 
     public function update($id, $data)
     {  
         $article = $this->articleModel->findorfail($id);
 
-        $article->update([
-            "title"=>$data->title,
-            "slug"=>$data->slug,
-            "content"=>$data->content,
-            "description"=>$data->description,
-            "cover"=>$data->cover,
-            ]);
+            $article->title=$data->title;
+            $article->slug=$data->slug;
+            $article->content=$data->content;
+            $article->description=$data->description;
+            $article->cover=$data->cover;
+
          $article->save();
 
          return $article;
     }
 
-    public function userArticles($id)
+    public function userArticles($data)
     {
-        return $this->articleModel->where("user_id", "$id")->latest()->paginate(15);
+        return $this->articleModel->where("user_id", $data)->latest()->paginate(15);
     }
 
 }

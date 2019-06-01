@@ -6,40 +6,66 @@ use App\models\User;
 
 class UserRepository
 {
+  private $userModel;
+
+  public function __construct(User $userModel)
+  {
+    $this->userModel = $userModel;
+  }
 
   public function all()
   {
-    return User::latest()->paginate(15);
+    return $this->userModel->latest()->paginate(15);
   }
 
-  public function get($id)
+  public function get($data)
   {
-    return User::findorfail($id);
+    return $this->userModel->findOrFail($data);
   }
 
-  public function getByName($name)
+  public function getByName($data)
   {
-    return User::where("username", $name)->firstOrFail();
+    return $this->userModel->where("username", $data)->firstOrFail();
+  }
+
+  public function getById($data)
+  {
+    return $this->userModel->where("id", $data)->firstOrFail();
   }
 
   public function update($id, $data)
   {
-    $user = User::findorfail($id);
-    $user->update($data);
-    return $user->save();
+    $user = $this->userModel->findorfail($id);
+
+
+    $user->full_name = $data->full_name;
+    $user->avatar = $data->avatar_file;
+
+    if (isset($data->password)) {
+      $user->password = $data->password;
+    }
+    $user->save();
+    return $user;
   }
 
   public function create($request)
   {
-    return  User::create(
+    $user = new $this->userModel;
 
-      [
+    $user->full_name = $request->full_name;
+    $user->avatar = $request->avatar_file;
+    $user->website = $request->website;
+    $user->phone = $request->phone;
+    $user->country_id = $request->country;
+    $user->status =  $user->active;
+    $user->social_account = $request->social_account;
+    $user->level_id = 1;
+    $user->points = 0;
+    $user->username = $request->username;
+    $user->email = $request->email;
+    $user->password = $request->password;
+    $user->save();
 
-        'full_name' => $request->full_name, 'avatar' => $request->avatar_file,
-        'website' => $request->website, 'phone' => $request->phone, 'country_id' => $request->country,
-        'status' => 'active', 'social_account' => $request->social_account,
-        'level_id' => 1, 'points' => 0, 'username' => $request->username, 'email' => $request->email, 'password' =>$request->password
-      ]
-    );
+    return $user;
   }
 }

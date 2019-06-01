@@ -8,7 +8,7 @@ use App\models\Tag;
 
 class Article extends Model
 {
-
+    
     protected $table = 'articles';
     protected $connection = 'mysql';
     protected $attributes = [

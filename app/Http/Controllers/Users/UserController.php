@@ -1,12 +1,12 @@
 <?php
 namespace App\Http\Controllers\Users;
 
-use App\Services\UserServices\UserProfileService;
 use App\Services\CountriesService;
-use App\Services\UserServices\CreateUserService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Services\UserServices\ProfileService;
+use App\Services\UserServices\CreateService;
 
 class UserController extends Controller
 {
@@ -15,9 +15,9 @@ class UserController extends Controller
     private $createUserService;
 
     public function __construct(
-        UserProfileService $userProfileService,
+        ProfileService $userProfileService,
         CountriesService $countriesService,
-        CreateUserService $createUserService
+        CreateService $createUserService
     ) {
         $this->countriesService = $countriesService;
         $this->userProfileService = $userProfileService;
@@ -55,5 +55,28 @@ class UserController extends Controller
         Auth::login($user);
 
         return redirect(route('user.profile',["name"=>$user->name]));
+    }
+
+
+    public function edit($id)
+    {
+        if(Auth::user()->id==$id){
+
+            $user = $this->userProfileService->getByid($id);
+            return view("user.edit",["user"=>$user]);
+        }
+    }
+
+    public function update(Request $request,$id)
+    {
+        $this->validate($request, [
+            'full_name' => 'required',
+            'avatar' => 'max:2048',
+            "password"=> "max:3"
+        ]);
+
+        $this->userProfileService->update($id,$request);
+
+        return redirect(route("user.profile",["name"=>Auth::user()->username]));
     }
 }

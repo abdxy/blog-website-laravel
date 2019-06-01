@@ -22,7 +22,7 @@
         {{$article->content}}
 
       </div>
-      <div class="datetime">{{ $article->published_at->format("Y-m-d")}}</div>
+      <div class="datetime">{{ $article->published_at->ago()}}</div>
       <a href="{{route("user.profile",["name"=>$article->user->username])}}">{{$article->user->username}}</a>
       <br><br><br>
       <div> 
@@ -42,7 +42,8 @@
    
   </div>
   <br>
-  @if ($article->user_id==auth()->user()->id)
-  <a class="button is-primary" href="/articles/{{$article->id}}/edit">edit</a> 
-    @endif
+  @auth("users")
+  <a class="button is-primary" href="/articles/{{$article->id}}/edit">edit</a>  
+  @endauth
+
 @endsection

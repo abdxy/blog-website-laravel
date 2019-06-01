@@ -15,7 +15,10 @@ class CategoriesRepository{
 
     public function create($data)
     {
-        return $this->categoryModel::create(["name"=>$data]);
+        return $category=new $this->categoryModel;
+        $category->name=$data;
+        $category->save();
+        return $category;
     }
 
     public function categories()
@@ -23,20 +26,20 @@ class CategoriesRepository{
         return $this->categoryModel::all();
     }
 
-    public function increase($category)
+    public function increase($data)
     {
-        $category->numbers_of_articles++;
-        $category->save();
+        $data->numbers_of_articles++;
+        $data->save();
     }
 
-    public function category($name)
+    public function category($data)
     {
-        return  $this->categoryModel::where('name',$name)->firstOrFail();
+        return  $this->categoryModel::where('name',$data)->firstOrFail();
     }
 
-    public function ArticlesOfCategory($name)
+    public function ArticlesOfCategory($data)
     {
-        return  $this->categoryModel::where("name",$name)->first()->articles()->latest()->paginate(15);
+        return  $this->categoryModel::where("name",$data)->first()->articles()->latest()->paginate(15);
     }
 
 

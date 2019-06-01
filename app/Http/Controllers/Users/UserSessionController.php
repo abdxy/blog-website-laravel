@@ -22,7 +22,6 @@ class UserSessionController extends Controller {
         'email'   => 'required|email|exists:users',
         'password' => 'required|min:3'
       ]);
-      //return dd([$request->email,$request->password]);
       
       if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
 

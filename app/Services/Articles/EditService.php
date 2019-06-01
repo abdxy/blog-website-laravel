@@ -3,7 +3,7 @@ namespace App\Services\Articles;
 
 use App\Repositories\ArticleRepository;
 
-class EditArticleService {
+class EditService {
 
     private $articleRepository;
 
@@ -14,14 +14,13 @@ class EditArticleService {
 
     public function update($data,$id)
     {   
-        $imageName = "default.png";
+        $imageName = $this->articleRepository->getByID($id)->cover;
         if (isset($data->cover1)) {
             $imageName = str_random(32) . '.' . $data->cover1->getClientOriginalExtension();
             $data->cover1->move(public_path('img/articles-covers/'), $imageName);
         }
         $data->request->add([
             "cover" => $imageName
-
         ]);
 
        return $this->articleRepository->update($id,$data);

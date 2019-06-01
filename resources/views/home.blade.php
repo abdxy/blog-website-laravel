@@ -22,7 +22,7 @@
          
 
                     <br>
-                    <div class="datetime">{{ $article->published_at->format("y-m-d-h")}}</div>
+                    <div class="datetime">{{ $article->published_at->ago()}}</div>
                 <a href="{{route("user.profile",["name"=>$article->user->username])}}">{{$article->user->username}}</a>
                  </div>
               </div>

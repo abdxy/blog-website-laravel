@@ -6,15 +6,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Repositories\TagsRepository;
 use App\Repositories\CategoriesRepository;
+use App\Services\TagsService;
 
-class CreateArticleService
+class CreateService
 {
 
     private $articleRepository;
     private $tagsRepository;
     private $categoriesRepository;
+    private $tagsService;
 
     public function __construct(
+        TagsService $tagsService,
         ArticleRepository $articleRepository,
         TagsRepository $tagsRepository,
         CategoriesRepository $categoriesRepository
@@ -22,6 +25,8 @@ class CreateArticleService
         $this->articleRepository = $articleRepository;
         $this->tagsRepository = $tagsRepository;
         $this->categoriesRepository = $categoriesRepository;
+        $this->tagsService = $tagsService;
+
     }
 
     public function create(Request $request)
@@ -31,32 +36,14 @@ class CreateArticleService
             $imageName = str_random(32) . '.' . $request->cover1->getClientOriginalExtension();
             $request->cover1->move(public_path('img/articles-covers/'), $imageName);
         }
-        $request->request->add([
-            "status" => "accepted", "cover" => $imageName,
-            "published_at" => now(), "user_id" => Auth::user()->id
-        ]);
 
+        $request->cover=$imageName;
+        $request->user_id=Auth::user()->id;
+  
+        $article = $this->articleRepository->create($request);
+        $this->tagsService->create($request->tags, $article);
 
-        $article = $this->articleRepository->create($request->except(["categories", 'tags', "_token", 'cover1']));
-        $this->createTags($request->tags, $article);
-        $this->Pivet($request->categories, $article);
-    }
-
-    public function createTags($tags, $article)
-    {
-        $tags = explode(",", $tags);
-        $tags = array_unique($tags);
-        foreach ($tags as $tag) {
-
-            $tag_return = $this->tagsRepository->create($tag);
-            $article->tags()->attach($tag_return->id);
-        }
-    }
-
-    public function Pivet($categories, $article)
-    {
-
-        foreach ($categories as $category) {
+        foreach ($request->categories as $category) {
             $category = $this->categoriesRepository->category($category);
             if ( $category != null) {
                 $this->categoriesRepository->increase($category);

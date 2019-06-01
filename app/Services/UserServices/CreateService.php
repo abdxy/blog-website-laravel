@@ -6,7 +6,7 @@
 
     use App\Repositories\UserRepository;
     
-    class CreateUserService {
+    class CreateService {
     
         private $userRepository;
     

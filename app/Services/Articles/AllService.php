@@ -1,28 +1,20 @@
 <?php
 
-
 namespace App\Services\Articles;
-
 
 use App\Repositories\ArticleRepository;
 
-
-class ShowArticleService{
-
+class AllService
+{
     private $articleRepository;
-
 
     public function __construct(ArticleRepository $articleRepository)
     {
         $this->articleRepository = $articleRepository;
-    
     }
 
-    public function getByslug($slug)
+    function allArticles()
     {
-       return $this->articleRepository->getByslug($slug);
+        return $this->articleRepository->all();
     }
-
- 
-
 }

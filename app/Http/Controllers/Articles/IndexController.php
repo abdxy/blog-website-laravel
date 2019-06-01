@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Articles;
 
 use App\Http\Controllers\Controller;
-use App\Services\Articles\AllArticlesService;
-use App\Services\Articles\ShowArticleService;
-use App\Models\User;
+
+use App\Services\Articles\AllService;
 
 class IndexController extends Controller
 {
@@ -13,7 +12,7 @@ class IndexController extends Controller
     private $allArticlesService;
 
 
-    public function __construct(AllArticlesService $allArticlesService)
+    public function __construct(AllService $allArticlesService)
     {
         $this->allArticlesService = $allArticlesService;
 

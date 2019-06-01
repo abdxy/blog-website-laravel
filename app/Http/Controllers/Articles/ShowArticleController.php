@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Articles;
 
 use App\Http\Controllers\Controller;
-use App\Services\Articles\ShowArticleService;
+
+use App\Services\Articles\ShowService;
 
 class ShowArticleController extends Controller{
 
     private $showArticleService;
 
-    public function __construct(ShowArticleService $showArticleService)
+    public function __construct(ShowService $showArticleService)
     {
         $this->showArticleService = $showArticleService;
     }

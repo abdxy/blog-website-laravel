@@ -3,16 +3,17 @@ namespace App\Http\Controllers\Articles;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Services\Articles\CreateArticleService;
+
 use Illuminate\Support\Facades\Auth;
-use App\Services\Articles\EditArticleService;
+use App\Services\Articles\CreateService;
+use App\Services\Articles\EditService;
 
 class ArticlesController extends Controller{
     
      private $createArticleService;
     private $editArticleService;
 
-    public function __construct(CreateArticleService $createArticleService,EditArticleService $editArticleService)
+    public function __construct(CreateService $createArticleService,EditService $editArticleService)
     {
         $this->editArticleService = $editArticleService;
         $this->createArticleService = $createArticleService;
@@ -25,7 +26,7 @@ class ArticlesController extends Controller{
     }
 
     public function store(Request $request)
-    {  // dd($request);
+    {  
         $this->validate($request,
         [   "title"=>"required|max:255",
             "content"=>"required",
@@ -35,8 +36,6 @@ class ArticlesController extends Controller{
             'cover1' => 'max:2048'
         ]
         );
-
-
 
         $this->createArticleService->create($request);
         
@@ -68,7 +67,7 @@ class ArticlesController extends Controller{
             'cover1' => 'max:2048'
         ]
         );
-        
+
         $article = $this->editArticleService->update($request,$id);
 
         return redirect( route("article.show",["slug"=>$article->slug]) );

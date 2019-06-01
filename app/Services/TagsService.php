@@ -12,6 +12,22 @@ class TagsService {
         $this->tagsRepository=$tagsRepository;
     }
 
+    public function create($tags,$article)
+    {
+        tags = explode(",", $tags);
+        $tags = array_unique($tags);
+
+        foreach ($tags as $tag) {
+            $tag_return=null;
+            if ( $this->tagsRepository->exists($tag)) {
+                $tag_return=$this->tagsRepository->update($tag);
+               }
+               $tag_return=$this->tagsRepository->create($tag);
+            $tag_return = $this->tagsRepository->create($tag);
+            $article->tags()->attach($tag_return->id);
+        }
+    }
+
     public function tag($name)
     {
      return   $this->tagsRepository->tag($name);

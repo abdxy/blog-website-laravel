@@ -4,7 +4,7 @@ namespace App\Services\UserServices;
 
 use App\Repositories\UserRepository;
 
-class AllUSersService
+class UsersService
 {
 
     private $userRepository;

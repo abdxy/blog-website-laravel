@@ -89,9 +89,11 @@
         <div class="card">
             <div class="card-content">
       @yield('content')
+         
     </div></div>
-    </div>
     @include('error')
+    </div>
+ 
   </section>
 
   </body>

@@ -22,7 +22,7 @@
     <div class="field">
             <div class="control">
                 <label for="content" class="label">content:</label>
-                <textarea class="textarea"   name="content" ></textarea>
+            <textarea class="textarea"   name="content" ></textarea>
             </div></div>
             <div class="field">
                 <div class="control">

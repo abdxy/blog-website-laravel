@@ -5,6 +5,7 @@
                         <figure class="media-left">
                           <p class="image is-128x128">
                             <img src={{"/img/users-photos/".$user->avatar}}>
+                           
                           </p>
                         </figure>
                         <div class="media-content">
@@ -13,7 +14,9 @@
                             <div class="title">" {{strtoupper($user->full_name)}} "</div>
                             </p>
                         <div class="subtitle">level :{{$user->level->name}}</div>
-                        
+                        @auth("users")
+                        <a class="button is-link" href="/users/{{$user->id}}/edit">edit profile</a>
+                        @endauth
                         
                    
 
@@ -23,6 +26,8 @@
                         </div>
                         @auth("users")
                         <a class="button is-primary" href="/articles/create">create new article</a>
+                   
+                      
                         @endauth
                       </article>
                       
@@ -49,7 +54,7 @@
                           
                  
                                      <br>
-                                     <div class="datetime">{{ $article->published_at->format("y-m-d-h")}}</div>
+                                     <div class="datetime">{{ $article->published_at->ago()}}</div>
 
                                   </div>
                                   
