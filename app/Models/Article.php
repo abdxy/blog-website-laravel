@@ -1,6 +1,6 @@
 <?php
 namespace App\Models;
-
+use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Model;
 use App\models\User;
 use App\models\Category;
@@ -8,6 +8,7 @@ use App\models\Tag;
 
 class Article extends Model
 {
+    use sluggable;
     
     protected $table = 'articles';
     protected $connection = 'mysql';
@@ -20,6 +21,22 @@ class Article extends Model
         'user_id', 'title', 'slug', 'description', 'content', 'cover', 'rating', 'category_id', 'status', 'published_at', 'last_rejected_at'
 
     ];
+
+
+
+    /**
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
 
     protected $casts = [
         'id' => 'integer', 'user_id' => 'integer', 'title' => 'string', 

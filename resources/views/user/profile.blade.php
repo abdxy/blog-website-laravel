@@ -13,10 +13,10 @@
                             <p>
                             <div class="title">" {{strtoupper($user->full_name)}} "</div>
                             </p>
-                        <div class="subtitle">level :{{$user->level->name}}</div>
-                        @auth("users")
+                        <div class="subtitle">level:{{$user->level->name}}</div>
+                        @can("profileOwner",$user->id)
                         <a class="button is-link" href="/users/{{$user->id}}/edit">edit profile</a>
-                        @endauth
+                        @endcan
                         
                    
 
@@ -24,18 +24,20 @@
                           
 
                         </div>
-                        @auth("users")
+                        @can("profileOwner",$user->id)
                         <a class="button is-primary" href="/articles/create">create new article</a>
                    
                       
-                        @endauth
+                        @endcan
                       </article>
                       
                       
            
                       <div class="row columns is-multiline">
-                        
-                            @foreach ($articles=$user->articles()->latest()->paginate(15) as $article)
+                        @php
+                            $articles=$user->articles()->latest()->paginate(15);
+                        @endphp
+                            @foreach ($articles as $article)
                             <div class="column is-one-third">
                              <div class="card">
                                  <div class="card-image">

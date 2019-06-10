@@ -14,7 +14,7 @@ class CountriesService {
         $this->countriesRepository = $countriesRepository;
     }
 
-public function All()
+public function all()
 {
     return $this->countriesRepository->getAll();
 }

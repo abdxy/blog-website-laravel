@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Services\UserServices\ProfileService;
 use App\Services\UserServices\CreateService;
+use App\Http\Requests\createUserRequest;
 
 class UserController extends Controller
 {
@@ -36,19 +37,10 @@ class UserController extends Controller
         return view('user.registration', ["countries" => $countries]);
     }
 
-    public function store(Request $request)
+    public function store(createUserRequest $request)
     {
  
-        $this->validate($request, [
-            'full_name' => 'required',
-            'username' => 'required|unique:users',
-            'email' => 'required|email|unique:users',
-            'password' => 'required',
-            'avatar' => 'max:2048',
-            'country'=>'required'
-          
-
-        ]);
+        $request->validated();
 
         $user=$this->createUserService->create($request);
 

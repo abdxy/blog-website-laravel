@@ -18,7 +18,6 @@ class ArticleRepository
     
         $article=new $this->articleModel;
         $article->title=$data->title;
-        $article->slug=$data->slug;
         $article->content=$data->content;
         $article->description=$data->description;
         $article->cover=$data->cover;
@@ -43,7 +42,7 @@ class ArticleRepository
 
     public function getBySlug($data)
     {
-      return $this->articleModel->where('slug',$data)->firstOrFail();
+      return $this->articleModel->whereSlug($data)->firstOrFail();
     }
 
     public function update($id, $data)
@@ -51,7 +50,6 @@ class ArticleRepository
         $article = $this->articleModel->findorfail($id);
 
             $article->title=$data->title;
-            $article->slug=$data->slug;
             $article->content=$data->content;
             $article->description=$data->description;
             $article->cover=$data->cover;

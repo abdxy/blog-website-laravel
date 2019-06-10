@@ -42,8 +42,8 @@
    
   </div>
   <br>
-  @auth("users")
+  @can('update', $article)
   <a class="button is-primary" href="/articles/{{$article->id}}/edit">edit</a>  
-  @endauth
+  @endcan
 
 @endsection

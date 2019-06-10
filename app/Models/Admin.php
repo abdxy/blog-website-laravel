@@ -2,15 +2,17 @@
 
 namespace App\models;
 
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Admin extends  Authenticatable
+class Admin extends Authenticatable
 {
     use Notifiable;
     /**
      * The connection name for the model.
      *
      * @var string
+     * 
      */
     protected $connection = 'mysql';
     
@@ -34,9 +36,11 @@ class Admin extends  Authenticatable
     ];
      
     protected $casts = [
-        'id'=>'integer','full_name'=>'string', 'avatar'=>'string', 'country_id'='integer'
-        , 'type'='string', 'status'='string'
-        , 'username'='string', 'email'='string', 'password'='string'
+        'id'=>'integer',
+        'full_name'=>'string',
+        'avatar'=>'string', 'country_id'=>'integer'
+        , 'type'=>'string', 'status'=>'string'
+        , 'username'=>'string', 'email'=>'string', 'password'=>'string'
     ];
     protected $dates=[];
     public function country()
@@ -51,5 +55,9 @@ class Admin extends  Authenticatable
     public function logs()
     {
         return  $this->hasMany(AdminsLog::class);
+    }
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
     }
 }

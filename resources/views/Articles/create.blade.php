@@ -11,11 +11,6 @@
       </div></div>
       <div class="field">
           <div class="control">
-              <label for="slug" class="label">slug:</label>
-              <input type="text" class="input"  name="slug" placeholder="new-games-blabla">
-          </div></div>
-      <div class="field">
-          <div class="control">
               <label for="desc" class="label">description:</label>
               <input type="input" class="input"  name="description" >
           </div></div>
@@ -31,8 +26,8 @@
                   @foreach ($categories as $cateogry)
  
                 <label class="checkbox">
-                    <input type="checkbox"  name="categories[]" value="{{$cateogry}}">
-                    {{$cateogry}}
+                    <input type="checkbox"  name="categories[]" value="{{$cateogry->name}}">
+                    {{$cateogry->name}}
                   </label>
                   @endforeach
                 </select>

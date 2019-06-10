@@ -7,6 +7,7 @@ use App\Repositories\TagsRepository;
 class TagsService {
 
     private $tagsRepository;
+
     public function __construct(TagsRepository $tagsRepository)
     {
         $this->tagsRepository=$tagsRepository;
@@ -14,16 +15,17 @@ class TagsService {
 
     public function create($tags,$article)
     {
-        tags = explode(",", $tags);
+        $tags = explode(",", $tags);
         $tags = array_unique($tags);
 
         foreach ($tags as $tag) {
             $tag_return=null;
             if ( $this->tagsRepository->exists($tag)) {
+
                 $tag_return=$this->tagsRepository->update($tag);
                }
-               $tag_return=$this->tagsRepository->create($tag);
-            $tag_return = $this->tagsRepository->create($tag);
+              else $tag_return=$this->tagsRepository->create($tag);
+
             $article->tags()->attach($tag_return->id);
         }
     }

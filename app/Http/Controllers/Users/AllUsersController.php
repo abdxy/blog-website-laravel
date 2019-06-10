@@ -2,13 +2,14 @@
 namespace App\Http\Controllers\Users;
 
 use App\Http\Controllers\Controller;
-use App\Services\Articles\AllService;
+
+use App\Services\UserServices\UsersService;
 
 class AllUSersController extends Controller
 {
     private $allUSersService;
 
-    public function __construct(AllService $allUSersService)
+    public function __construct(UsersService $allUSersService)
     {
         $this->allUSersService = $allUSersService;
     }

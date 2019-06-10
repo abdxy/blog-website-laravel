@@ -42,7 +42,7 @@ class CreateService
   
         $article = $this->articleRepository->create($request);
         $this->tagsService->create($request->tags, $article);
-
+        dd($request->categories);
         foreach ($request->categories as $category) {
             $category = $this->categoriesRepository->category($category);
             if ( $category != null) {

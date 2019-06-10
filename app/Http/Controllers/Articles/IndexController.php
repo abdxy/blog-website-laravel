@@ -20,12 +20,12 @@ class IndexController extends Controller
 
     public function index()
     {
-        $guard = auth()->guard(); 
-        $sessionName = $guard->getName(); 
-        $parts = explode("_", $sessionName);
-        unset($parts[count($parts)-1]);
-        unset($parts[0]);
-        $guardName = implode("_",$parts);
+        // $guard = auth()->guard(); 
+        // $sessionName = $guard->getName(); 
+        // $parts = explode("_", $sessionName);
+        // unset($parts[count($parts)-1]);
+        // unset($parts[0]);
+        // $guardName = implode("_",$parts);
         //return $guardName;
 
         return  view('home', ['articles' => $this->allArticlesService->allArticles()]);

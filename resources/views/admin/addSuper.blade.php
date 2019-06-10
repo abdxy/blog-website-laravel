@@ -2,8 +2,8 @@
 @section('content')
 <div class="card">
         <div class="card-content">
-<h2 class="title"> Admin Login</h2>
-<form method="POST" action="{{route("admin.login")}}">
+<h2 class="title"> add supervisor</h2>
+<form method="POST" action="/dashboard/addsuper">
     @csrf
     <div class="field">
     <div class="control">
@@ -18,7 +18,7 @@
 
     <div class="field">
             <div class="control">
-              <button class="button is-link">login</button>
+              <button class="button is-link">add</button>
             </div>
           
           </div>

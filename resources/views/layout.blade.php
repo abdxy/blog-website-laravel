@@ -53,14 +53,13 @@
                                             @endauth
 
                                             @auth('admin')
-                                           <a class="navbar-item" href="/admin-dashboard/{{auth()->user()->id}}">
-                                            Profile
+                                           <a class="navbar-item" href="/dashboard/{{auth()->user()->id}}">
+                                            DashBoard
                                           </a>
                                             @endauth
                                             @auth('supervisor')
-                                    
-                                           <a class="navbar-item" href="/supervisor-dashboard/{{auth()->user()->id}}">
-                                            Profile
+                                           <a class="navbar-item" href="super/dashboard/{{auth()->user()->id}}">
+                                            DashBoard
                                         </a>
                                         @endauth
                                         

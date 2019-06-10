@@ -7,14 +7,22 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Services\Articles\CreateService;
 use App\Services\Articles\EditService;
+use App\Services\CategoriesService;
+use App\Http\Requests\createArticleRequest;
+use App\Http\Requests\updateArticleRequest;
+use App\Models\Article;
 
 class ArticlesController extends Controller{
     
-     private $createArticleService;
+    private $createArticleService;
     private $editArticleService;
+    private $categoriesService;
 
-    public function __construct(CreateService $createArticleService,EditService $editArticleService)
+    public function __construct(CreateService $createArticleService,
+    EditService $editArticleService,
+    CategoriesService $categoriesService)
     {
+        $this->categoriesService = $categoriesService;
         $this->editArticleService = $editArticleService;
         $this->createArticleService = $createArticleService;
         
@@ -22,20 +30,13 @@ class ArticlesController extends Controller{
 
     public function create()
     {
-        return view("articles.create",["categories"=>["games","life"]]);
+        $categories=$this->categoriesService->categories();
+        return view("articles.create",["categories"=>$categories]);
     }
 
-    public function store(Request $request)
+    public function store(createArticleRequest $request)
     {  
-        $this->validate($request,
-        [   "title"=>"required|max:255",
-            "content"=>"required",
-            "description"=>"required" ,
-            "tags"=>"required|regex:/^([A-Za-z0-9]+,)*[A-Za-z0-9]+$/",
-            "slug"=>"required|unique:articles|regex:/^([A-Za-z0-9]+-)*[A-Za-z0-9]+$/",
-            'cover1' => 'max:2048'
-        ]
-        );
+        $request->validated();
 
         $this->createArticleService->create($request);
         
@@ -57,18 +58,10 @@ class ArticlesController extends Controller{
    
     }
 
-    public function update(Request $request,$id)
+    public function update(updateArticleRequest $request,Article $article)
     {
-        $this->validate($request,
-        [   "title"=>"required|max:255",
-            "content"=>"required",
-            "description"=>"required",
-            "slug"=>"required|regex:/^([A-Za-z0-9]+-)*[A-Za-z0-9]+$/",
-            'cover1' => 'max:2048'
-        ]
-        );
 
-        $article = $this->editArticleService->update($request,$id);
+       $article = $this->editArticleService->update($request,$article->id);
 
         return redirect( route("article.show",["slug"=>$article->slug]) );
     }
